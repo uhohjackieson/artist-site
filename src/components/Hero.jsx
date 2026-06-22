@@ -4,76 +4,62 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-black text-white overflow-hidden pt-28">
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-950/40 via-black to-purple-950/30" />
+    <section className="relative min-h-screen bg-gradient-to-br from-black via-black to-zinc-950 text-white overflow-hidden pt-36">
+      <div className="absolute -left-40 top-40 h-96 w-96 rounded-full bg-pink-500/10 blur-3xl" />
+      <div className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 min-h-[calc(100vh-7rem)] grid lg:grid-cols-[0.85fr_1.15fr] gap-14 items-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="pb-10"
         >
-          <p className="text-pink-400 font-semibold mb-4">
-            Guitarist • Performer • Content Creator
+          <p className="text-pink-400 uppercase tracking-[0.5em] text-xs font-semibold mb-6">
+            Guitarist • Performer • Creator
           </p>
 
-          <h1 className="text-6xl md:text-8xl font-black leading-none">
+          <h1 className="text-6xl md:text-7xl xl:text-8xl font-extrabold leading-[0.9] tracking-[-0.06em]">
             Jaclyn
             <span className="block text-pink-500">Rose</span>
           </h1>
 
-          <p className="mt-8 text-lg text-gray-300 max-w-xl leading-relaxed">
-            Rock and pop-punk inspired guitarist creating covers, live
-            performances, and guitar-driven content.
+          <p className="mt-8 text-lg md:text-xl text-zinc-300 max-w-lg leading-relaxed font-normal">
+            Rock guitarist, performer, and content creator.
           </p>
 
           <div className="flex flex-wrap gap-4 mt-10">
             <a
               href="#videos"
-              className="bg-pink-600 hover:bg-pink-700 px-7 py-4 rounded-full font-bold flex items-center gap-2 transition"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-black text-black hover:bg-pink-500 hover:text-white transition"
             >
-              <Play size={20} />
+              <Play size={18} />
               Watch Videos
             </a>
 
             <a
               href="#contact"
-              className="border border-white/20 hover:border-pink-500 hover:text-pink-400 px-7 py-4 rounded-full font-bold transition"
+              className="rounded-full border border-white/20 px-8 py-4 font-black text-white hover:border-pink-400 hover:text-pink-300 transition"
             >
-              Book / Contact
-            </a>
-          </div>
-
-          <div className="flex gap-5 mt-10 text-gray-400">
-            <a
-              href="https://instagram.com/uhohjackieson"
-              className="hover:text-pink-400 transition"
-            >
-              Instagram
-            </a>
-
-            <a
-              href="https://youtube.com/@jaclynrose696"
-              className="hover:text-pink-400 transition"
-            >
-              YouTube
+              Work With Me
             </a>
           </div>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute inset-0 bg-pink-600 blur-3xl opacity-20 rounded-full" />
+        <motion.div
+          initial={{ opacity: 0, x: 34 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9 }}
+          className="relative"
+        >
+          <div className="absolute -right-10 top-20 h-72 w-72 rounded-full bg-pink-500/20 blur-3xl" />
 
-          <div className="relative bg-white/5 border border-white/10 rounded-3xl p-6 shadow-2xl">
-            <div className="relative bg-white/5 border border-white/10 rounded-3xl p-6 shadow-2xl hover:scale-[1.02] transition duration-500">
-              <img
-                src={artistPhoto}
-                alt="Jaclyn Rose"
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            </div>
-          </div>
-        </div>
+          <img
+            src={artistPhoto}
+            alt="Jaclyn Rose performing guitar"
+            className="relative w-full h-[560px] md:h-[720px] object-cover object-center rounded-[1.25rem] shadow-2xl"
+          />
+        </motion.div>
       </div>
     </section>
   );
