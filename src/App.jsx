@@ -6,6 +6,7 @@ import ShopPreview from "./components/ShopPreview";
 import WorkWithMe from "./components/WorkWithMe";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Instagram from "./components/Instagram";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <ShopPreview />
       <WorkWithMe />
       <About />
+      <Instagram />
       <Contact />
     </div>
   );
