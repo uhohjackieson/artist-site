@@ -1,4 +1,4 @@
-import { Play } from "lucide-react";
+import { Play, ChevronDown } from "lucide-react";
 import artistPhoto from "../assets/jaclyn.jpg";
 import { motion } from "framer-motion";
 
@@ -61,6 +61,24 @@ export default function Hero() {
           />
         </motion.div>
       </div>
+
+      <motion.a
+        href="#videos"
+        aria-label="Scroll to videos"
+        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-zinc-500 hover:text-pink-400 transition"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          y: [0, 8, 0],
+        }}
+        transition={{
+          opacity: { delay: 1, duration: 0.6 },
+          y: { repeat: Infinity, duration: 1.8, ease: "easeInOut" },
+        }}
+      >
+        <span className="text-[10px] uppercase tracking-[0.4em]">Scroll</span>
+        <ChevronDown size={20} />
+      </motion.a>
     </section>
   );
 }
