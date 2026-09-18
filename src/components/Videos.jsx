@@ -1,8 +1,8 @@
 import Reveal from "./Reveal";
 
 const video = {
-  title: "Whole Lotta Love",
-  embed: "https://www.youtube.com/embed/HWM9DRh3sgU",
+  title: "Metallica",
+  embed: "https://youtube.com/shorts/tP7IPOTldEs?si=FkQ2NVffrzfKdzhd",
 };
 
 export default function Videos() {
