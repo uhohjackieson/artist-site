@@ -1,25 +1,25 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Stats from "./components/Stats";
 import Videos from "./components/Videos";
-import Lessons from "./components/Lessons";
+import Booking from "./components/Booking";
 import ShopPreview from "./components/ShopPreview";
 import WorkWithMe from "./components/WorkWithMe";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#0a0a0d] text-[#f2f2f4]">
       <Navbar />
       <Hero />
-      <Stats />
       <Videos />
-      <Lessons />
+      <Booking />
       <ShopPreview />
       <WorkWithMe />
       <About />
       <Contact />
+      <Footer />
     </div>
   );
 }

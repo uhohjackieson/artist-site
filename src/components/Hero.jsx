@@ -1,84 +1,89 @@
-import { Play, ChevronDown } from "lucide-react";
-import artistPhoto from "../assets/jaclyn.jpg";
+import { Play } from "lucide-react";
 import { motion } from "framer-motion";
+import artistPhoto from "../assets/jaclyn.jpg";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-black via-black to-zinc-950 text-white overflow-hidden pt-36">
-      <div className="absolute -left-40 top-40 h-96 w-96 rounded-full bg-pink-500/10 blur-3xl" />
-      <div className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
+    <section id="top" className="relative overflow-hidden pt-40 pb-24">
+      {/* fade-out violet glow */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2 top-[-15%] w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] pointer-events-none blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 40%, rgba(183,95,208,.22), rgba(154,75,181,.10) 42%, transparent 70%)",
+        }}
+      />
 
-      <div className="relative max-w-7xl mx-auto px-6 min-h-[calc(100vh-7rem)] grid lg:grid-cols-[0.85fr_1.15fr] gap-14 items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
+      <div className="relative max-w-6xl mx-auto px-6 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="pb-10"
+          transition={{ duration: 0.7 }}
+          className="text-[0.68rem] font-semibold tracking-[0.36em] uppercase text-[#b75fd0]"
         >
-          <p className="text-pink-400 uppercase tracking-[0.5em] text-xs font-semibold mb-6">
-            Guitarist • Performer • Creator
-          </p>
+          Guitarist • Performer • Creator
+        </motion.p>
 
-          <h1 className="text-6xl md:text-7xl xl:text-8xl font-extrabold leading-[0.9] tracking-[-0.06em]">
-            Jaclyn
-            <span className="block text-pink-500">Rose</span>
-          </h1>
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.08 }}
+          className="font-semibold uppercase tracking-[0.02em] leading-none mt-5 text-[clamp(3.4rem,10vw,7.5rem)]"
+        >
+          Jaclyn <span className="text-[#b75fd0]">Rose</span>
+        </motion.h1>
 
-          <p className="mt-8 text-lg md:text-xl text-zinc-300 max-w-lg leading-relaxed font-normal">
-            Rock guitarist, performer, and content creator.
-          </p>
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.16 }}
+          className="text-[#b6b6c2] text-[1.08rem] leading-[1.8] max-w-[33rem] mx-auto mt-6"
+        >
+          Rock guitarist, performer, and content creator — playing the songs
+          people actually want to hear.
+        </motion.p>
 
-          <div className="flex flex-wrap gap-4 mt-10">
-            <a
-              href="#videos"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-black text-black hover:bg-pink-500 hover:text-white transition"
-            >
-              <Play size={18} />
-              Watch Videos
-            </a>
-
-            <a
-              href="#contact"
-              className="rounded-full border border-white/20 px-8 py-4 font-black text-white hover:border-pink-400 hover:text-pink-300 transition"
-            >
-              Work With Me
-            </a>
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.24 }}
+          className="flex flex-wrap justify-center gap-3.5 mt-9"
+        >
+          <a
+            href="#videos"
+            className="inline-flex items-center gap-2.5 rounded-full bg-white text-[#0a0a0d] px-8 py-4 text-[0.85rem] font-semibold hover:bg-gradient-to-br hover:from-[#d18ce8] hover:to-[#b75fd0] transition-all"
+          >
+            <Play size={17} />
+            Watch Videos
+          </a>
+          <a
+            href="#lessons"
+            className="inline-flex items-center rounded-full border border-white/10 px-8 py-4 text-[0.85rem] font-semibold hover:border-[#b75fd0] hover:text-[#d18ce8] transition-colors"
+          >
+            Book a Lesson
+          </a>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 34 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9 }}
-          className="relative"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.32 }}
+          className="relative mt-16 rounded-2xl overflow-hidden group"
         >
-          <div className="absolute -right-10 top-20 h-72 w-72 rounded-full bg-pink-500/20 blur-3xl" />
-
           <img
             src={artistPhoto}
-            alt="Jaclyn Rose performing guitar"
-            className="relative w-full h-[560px] md:h-[720px] object-cover object-center rounded-[1.25rem] shadow-2xl"
+            alt="Jaclyn Rose performing live"
+            className="w-full h-[clamp(380px,58vh,620px)] object-cover object-[center_24%] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(10,10,13,.72), rgba(10,10,13,.18) 45%, transparent 70%), linear-gradient(210deg, rgba(183,95,208,.16), transparent 58%)",
+            }}
           />
         </motion.div>
       </div>
-
-      <motion.a
-        href="#videos"
-        aria-label="Scroll to videos"
-        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-zinc-500 hover:text-pink-400 transition"
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          y: [0, 8, 0],
-        }}
-        transition={{
-          opacity: { delay: 1, duration: 0.6 },
-          y: { repeat: Infinity, duration: 1.8, ease: "easeInOut" },
-        }}
-      >
-        <span className="text-[10px] uppercase tracking-[0.4em]">Scroll</span>
-        <ChevronDown size={20} />
-      </motion.a>
     </section>
   );
 }

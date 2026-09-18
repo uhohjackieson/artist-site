@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const services = [
   {
     title: "Guitar Lessons",
@@ -6,8 +8,7 @@ const services = [
   },
   {
     title: "Live Performances",
-    description:
-      "Available for events, showcases, and live music opportunities.",
+    description: "Available for events, showcases, and live music opportunities.",
   },
   {
     title: "Brand Collaborations",
@@ -23,37 +24,34 @@ const services = [
 
 export default function WorkWithMe() {
   return (
-    <section id="work" className="bg-black text-white px-6 py-32">
-      <div className="max-w-7xl mx-auto">
-        <p className="text-pink-400 uppercase tracking-[0.45em] text-xs font-semibold">
-          Work With Me
-        </p>
+    <section
+      id="work"
+      className="py-28 md:py-32 bg-[#101014] border-y border-white/10"
+    >
+      <div className="max-w-6xl mx-auto px-6">
+        <Reveal className="max-w-[44rem] mb-14">
+          <p className="text-[0.68rem] font-semibold tracking-[0.36em] uppercase text-[#b75fd0]">
+            Work With Me
+          </p>
+          <h2 className="font-semibold uppercase tracking-[0.02em] leading-[1.14] mt-4 text-[clamp(1.9rem,4.2vw,2.9rem)]">
+            Music, content, and collaborations.
+          </h2>
+        </Reveal>
 
-        <h2 className="mt-4 text-4xl md:text-6xl font-black tracking-tight max-w-3xl">
-          Music, content, and creative collaborations.
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-8 mt-16">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="border border-white/10 p-8 rounded-2xl hover:border-pink-500/50 transition"
-            >
-              <h3 className="text-2xl font-black">{service.title}</h3>
-
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                {service.description}
-              </p>
-            </div>
+        <div className="grid sm:grid-cols-2 gap-5">
+          {services.map((service, i) => (
+            <Reveal key={service.title} delay={i * 0.08}>
+              <div className="h-full bg-[#0a0a0d] border border-white/10 rounded-2xl p-8 transition-all hover:border-[#b75fd0]/45 hover:bg-gradient-to-br hover:from-[#b75fd0]/12 hover:to-[#0a0a0d]">
+                <h3 className="font-semibold uppercase tracking-[0.04em] text-[1.1rem]">
+                  {service.title}
+                </h3>
+                <p className="text-[#8f8f9c] leading-[1.72] text-[0.94rem] mt-3">
+                  {service.description}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
-
-        <a
-          href="#contact"
-          className="inline-block mt-12 bg-pink-600 hover:bg-pink-500 px-8 py-4 rounded-full font-black transition"
-        >
-          Get In Touch
-        </a>
       </div>
     </section>
   );
