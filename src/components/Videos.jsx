@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 
 const video = {
   title: "Metallica",
-  embed: "https://youtube.com/shorts/tP7IPOTldEs?si=FkQ2NVffrzfKdzhd",
+  embed: "https://www.youtube.com/embed/tP7IPOTldEs",
 };
 
 export default function Videos() {
