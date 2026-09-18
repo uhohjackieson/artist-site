@@ -68,12 +68,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.32 }}
-          className="relative mt-16 rounded-2xl overflow-hidden group"
+          className="relative mx-auto mt-16 max-w-[520px] rounded-2xl overflow-hidden group"
         >
           <img
             src={artistPhoto}
             alt="Jaclyn Rose performing live"
-            className="w-full h-[clamp(380px,58vh,620px)] object-cover object-[center_24%] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+            className="w-full h-[clamp(520px,72vh,760px)] object-cover object-[center_18%] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
           />
           <div
             className="absolute inset-0 pointer-events-none"
