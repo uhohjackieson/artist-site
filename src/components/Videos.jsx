@@ -17,8 +17,8 @@ export default function Videos() {
             {video.title}
           </h2>
           <p className="text-[#8f8f9c] leading-[1.85] mt-5 text-[1.02rem]">
-            Led Zeppelin cover, recorded live. More covers, riffs, and lesson
-            clips over on YouTube.
+            Metallica cover, recorded live. More covers, riffs, and lesson clips
+            over on YouTube.
           </p>
         </Reveal>
 
