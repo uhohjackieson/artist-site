@@ -1,91 +1,69 @@
-import Reveal from "./Reveal";
+import { useState } from 'react';
+import Reveal from './Reveal';
 
-// ── Your Shopify store ──────────────────────────────────────
-const STORE_URL = "https://djipzx-fz.myshopify.com/";
-
-// Swap any "link" for a direct product URL to send buyers straight
-// to that item. Leaving it as STORE_URL sends them to the store home.
-const shopItems = [
-  {
-    title: "Guitar Tabs",
-    description: "Downloadable tabs for covers, riffs, and lesson material.",
-    link: STORE_URL,
-  },
-  {
-    title: "Backing Tracks",
-    description: "Practice tracks for solos, riffs, and song sections.",
-    link: STORE_URL,
-  },
-  {
-    title: "Merch",
-    description: "Artist merch and limited drops from the store.",
-    link: STORE_URL,
-  },
-  {
-    title: "Lesson Packages",
-    description: "Single lessons and bundled packages for guitar students.",
-    link: "#lessons",
-  },
-];
+const PRODUCT = { name: 'Jaclyn Rose Signature Guitar Picks — 3 Pack', price: 4.99 };
 
 export default function ShopPreview() {
-  return (
-    <section id="shop" className="py-28 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
-        <Reveal className="max-w-[44rem] mx-auto text-center mb-14">
-          <p className="text-[0.68rem] font-semibold tracking-[0.36em] uppercase text-[#b75fd0]">
-            Store
-          </p>
-          <h2 className="font-semibold uppercase tracking-[0.02em] leading-[1.14] mt-4 text-[clamp(1.9rem,4.2vw,2.9rem)]">
-            Tabs, Tracks, Merch &amp; More.
-          </h2>
-          <p className="text-[#8f8f9c] leading-[1.85] mt-5 text-[1.02rem]">
-            Guitar resources, digital downloads, and Jaclyn Rose merch.
-          </p>
-          <div className="mt-8">
-            <a
-              href={STORE_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center rounded-full bg-gradient-to-br from-[#d18ce8] to-[#b75fd0] text-[#0a0a0d] px-8 py-4 text-[0.85rem] font-semibold hover:from-[#e0a6f2] hover:to-[#c977e0] transition-all"
-            >
-              Visit Store
-            </a>
-          </div>
-        </Reveal>
+  const [quantity, setQuantity] = useState(1);
+  const [address, setAddress] = useState({ name: '', street1: '', city: '', state: '', zip: '', country: 'US' });
+  const [rates, setRates] = useState([]);
+  const [selectedRate, setSelectedRate] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-        <Reveal delay={0.08}>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
-            {shopItems.map((item) => {
-              const isAnchor = item.link.startsWith("#");
-              return (
-                <div
-                  key={item.title}
-                  className="flex flex-col bg-[#101014] border border-white/10 rounded-2xl p-7 transition-all hover:border-[#b75fd0]/50 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-[#b75fd0]/10 hover:to-[#101014]"
-                >
-                  <span className="text-[0.58rem] font-bold tracking-[0.3em] uppercase text-[#9a4bb5]">
-                    Available
-                  </span>
-                  <h3 className="font-semibold uppercase tracking-[0.04em] text-[1.1rem] mt-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-[#8f8f9c] text-[0.9rem] leading-[1.68] mt-3 grow">
-                    {item.description}
-                  </p>
-                  <a
-                    href={item.link}
-                    target={isAnchor ? undefined : "_blank"}
-                    rel={isAnchor ? undefined : "noreferrer"}
-                    className="mt-6 text-center rounded-full border border-[#b75fd0]/45 text-[#d18ce8] px-4 py-3 text-[0.74rem] font-semibold hover:bg-[#b75fd0] hover:text-white hover:border-[#b75fd0] transition-all"
-                  >
-                    {isAnchor ? "Get In Touch" : "Shop Now"}
-                  </a>
-                </div>
-              );
-            })}
+  async function quote(e) {
+    e.preventDefault();
+    setError(''); setRates([]); setSelectedRate(''); setLoading(true);
+    try {
+      const response = await fetch('/api/shipping-quote', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ address, quantity })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Could not retrieve shipping rates.');
+      setRates(data.rates || []);
+      if (!(data.rates || []).length) setError('No shipping rates available for this address.');
+    } catch (err) { setError(err.message); }
+    finally { setLoading(false); }
+  }
+
+  const field = 'w-full bg-[#0a0a0d] border border-white/15 rounded-lg px-4 py-3 text-white placeholder:text-[#777] focus:outline-none focus:border-[#b75fd0]';
+  const update = (key) => (e) => setAddress(prev => ({ ...prev, [key]: e.target.value }));
+  return <section id="shop" className="py-28 md:py-32 border-y border-white/10">
+    <div className="max-w-6xl mx-auto px-6">
+      <Reveal><p className="text-[#b75fd0] uppercase tracking-[.3em] text-xs font-semibold">Official merch</p>
+      <h2 className="text-3xl md:text-5xl font-semibold uppercase mt-4">The Shop</h2>
+      <p className="text-[#b6b6c2] mt-4">Signature picks today. More guitar merch coming soon.</p></Reveal>
+      <div className="grid lg:grid-cols-2 gap-8 mt-12">
+        <div className="rounded-2xl border border-white/10 bg-[#101014] p-8">
+          <div className="aspect-video rounded-xl bg-gradient-to-br from-[#291735] to-[#101014] flex items-center justify-center text-[#d18ce8] text-center px-6">Add your actual guitar pick product photo here</div>
+          <h3 className="text-xl font-semibold mt-7">{PRODUCT.name}</h3>
+          <p className="text-[#b6b6c2] mt-3">Three matching custom-designed signature guitar picks per pack.</p>
+          <p className="text-2xl font-semibold text-[#d18ce8] mt-5">${PRODUCT.price.toFixed(2)} <span className="text-sm text-[#b6b6c2]">per pack, plus shipping and applicable tax</span></p>
+          <label className="block mt-6 text-sm" htmlFor="pick-quantity">Number of packs</label>
+          <select id="pick-quantity" className={`${field} mt-2`} value={quantity} onChange={e => { setQuantity(Number(e.target.value)); setRates([]); setSelectedRate(''); }}>
+            {Array.from({length: 10}, (_,i) => i+1).map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+        </div>
+        <form onSubmit={quote} className="rounded-2xl border border-white/10 bg-[#101014] p-8 space-y-4">
+          <h3 className="text-xl font-semibold">Estimate shipping</h3>
+          <p className="text-[#b6b6c2] text-sm">Enter the destination to request live carrier quotes. No payment will be taken yet.</p>
+          <input required className={field} placeholder="Full name" value={address.name} onChange={update('name')} />
+          <input required className={field} placeholder="Street address" value={address.street1} onChange={update('street1')} />
+          <div className="grid grid-cols-2 gap-3">
+            <input required className={field} placeholder="City" value={address.city} onChange={update('city')} />
+            <input className={field} placeholder="State / province" value={address.state} onChange={update('state')} />
+            <input required className={field} placeholder="Postal code" value={address.zip} onChange={update('zip')} />
+            <select className={field} value={address.country} onChange={update('country')}>
+              {['US','CA','GB','AU','DE','FR','IT','ES','NL','BE','IE','SE','DK','PL'].map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
           </div>
-        </Reveal>
+          <button disabled={loading} type="submit" className="w-full rounded-full bg-[#b75fd0] text-[#0a0a0d] font-semibold px-6 py-3 disabled:opacity-60">{loading ? 'Calculating…' : 'Calculate shipping'}</button>
+          {error && <p role="alert" className="text-red-300 text-sm">{error}</p>}
+          {rates.length > 0 && <div className="space-y-2"><p className="font-semibold">Available shipping options</p>{rates.map(r => <label key={r.id} className="flex gap-3 items-center border border-white/15 rounded-lg p-3"><input type="radio" name="shipping-rate" checked={selectedRate===r.id} onChange={()=>setSelectedRate(r.id)} /><span className="flex-1">{r.provider} — {r.service}</span><span>${r.amount} {r.currency}</span></label>)}</div>}
+          <p className="text-[#b6b6c2] text-xs">Checkout is intentionally disabled until Stripe is securely connected and the shipping address and rate are revalidated on the server.</p>
+        </form>
       </div>
-    </section>
-  );
+    </div>
+  </section>;
 }
